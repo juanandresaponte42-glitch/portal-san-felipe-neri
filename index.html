@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Académico | San Felipe Neri</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --azul-neri: #2E4191;
+            --rojo-neri: #E31E24;
+            --amarillo-neri: #F7E017;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8fafc; }
+        .bg-azul { background-color: var(--azul-neri); }
+        .text-azul { color: var(--azul-neri); }
+        .bg-rojo { background-color: var(--rojo-neri); }
+        .text-rojo { color: var(--rojo-neri); }
+        
+        .hidden { display: none; }
+        .fade-in { animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        input, select { border: 1px solid #cbd5e1; padding: 12px; border-radius: 10px; width: 100%; outline: none; transition: 0.3s; }
+        input:focus { border-color: var(--azul-neri); box-shadow: 0 0 0 3px rgba(46, 65, 145, 0.1); }
+
+        /* Iconos de Redes Sociales abajo a la derecha */
+        .social-fixed { position: fixed; bottom: 25px; right: 25px; z-index: 100; display: flex; flex-direction: column; gap: 12px; }
+        .social-btn { width: 50px; height: 50px; border-radius: 50%; display: flex; items-center; justify-content: center; color: white; font-size: 24px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: transform 0.3s; }
+        .social-btn:hover { transform: scale(1.1); }
+    </style>
+</head>
+<body>
+
+    <!-- REDES SOCIALES (Fijas Abajo Derecha) -->
+    <div class="social-fixed">
+        <a href="https://www.facebook.com/Superadm1/?locale=es_LA" target="_blank" class="social-btn bg-[#1877F2] flex items-center justify-center">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://www.instagram.com/felipeneribogota/?hl=es-la" target="_blank" class="social-btn bg-[#E1306C] flex items-center justify-center">
+            <i class="fab fa-instagram"></i>
+        </a>
+    </div>
+
+    <!-- HEADER SUPERIOR -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-2 flex justify-between items-center">
+            
+            <!-- IZQUIERDA: IMAGEN 1 + IDENTIDAD -->
+            <div class="flex items-center space-x-3">
+                <img src="1.jpeg" alt="Escudo Izquierda" class="h-12 md:h-16 w-auto object-contain">
+                <div id="header-id-container" class="border-l-2 border-gray-100 pl-3">
+                    <div id="default-school-text">
+                        <h1 class="text-lg font-black text-azul leading-none uppercase tracking-tighter">San Felipe Neri</h1>
+                        <p class="text-[9px] font-bold text-rojo tracking-[0.4em] uppercase">Bogotá</p>
+                    </div>
+                    <div id="logged-user-text" class="hidden">
+                        <p class="text-[9px] font-bold text-gray-400 uppercase tracking-widest leading-none">Estudiante:</p>
+                        <h2 id="display-name" class="text-md font-black text-azul leading-none uppercase italic">Nombre Usuario</h2>
+                        <button onclick="logout()" class="text-[8px] text-rojo font-bold uppercase underline">Cerrar Sesión</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DERECHA: NAV -->
+            <nav class="hidden lg:flex items-center space-x-6 font-bold text-xs uppercase tracking-widest">
+                <a href="#" onclick="showPage('home')" class="text-azul hover:text-rojo transition">Inicio</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- SECCIÓN AZUL (HERO) -->
+    <main id="home" class="page-view fade-in">
+        <section class="relative min-h-[90vh] flex items-center justify-center text-center bg-[#0d1b3e] py-16">
+            <!-- Fondo sutil de estudiantes -->
+            <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1500&q=80" class="absolute inset-0 w-full h-full object-cover opacity-10">
+            
+            <div class="relative z-10 text-white px-6 container mx-auto">
+                <h2 class="text-6xl md:text-8xl font-black mb-6 tracking-tighter drop-shadow-lg">BIENVENIDOS</h2>
+                
+                <!-- TEXTO AMARILLO ACTUALIZADO -->
+                <p class="text-xl md:text-2xl text-yellow-400 mb-12 tracking-wide uppercase font-bold max-w-4xl mx-auto leading-relaxed">
+                    COLEGIO SAN FELIPE NERI LA MEJOR OPCIÓN PARA QUE SUS HIJOS SE EDUQUEN
+                </p>
+                
+                <!-- CONTENEDOR CENTRAL: BOTONES E IMAGEN GRANDE -->
+                <div id="home-actions" class="flex flex-col lg:flex-row items-center justify-center gap-12">
+                    
+                    <!-- Columna de Botones -->
+                    <div class="flex flex-col gap-6 w-full lg:w-auto">
+                        <button onclick="showPage('reg-1')" class="bg-rojo text-white px-12 py-5 rounded-2xl font-black text-xl shadow-2xl hover:scale-105 transition uppercase tracking-widest border-2 border-rojo">
+                            Registrarse
+                        </button>
+
+                        <button onclick="showPage('login')" class="bg-white/10 backdrop-blur-md border-2 border-white text-white px-12 py-5 rounded-2xl font-black text-xl hover:bg-white hover:text-azul transition uppercase tracking-widest">
+                            Iniciar Sesión
+                        </button>
+                    </div>
+
+                    <!-- IMAGEN 2 (MÁS GRANDE) -->
+                    <div class="flex items-center justify-center">
+                        <img src="2.jpeg" alt="Imagen Institucional" class="h-64 md:h-[450px] w-auto object-contain border-4 border-white/40 rounded-3xl p-2 bg-white/5 backdrop-blur-sm shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- VISTA: LOGIN -->
+    <section id="login" class="page-view hidden min-h-[80vh] flex items-center justify-center p-6 fade-in">
+        <div class="bg-white max-w-md w-full rounded-3xl shadow-2xl p-12 border-b-8 border-azul text-center">
+            <h3 class="text-3xl font-black text-azul uppercase mb-10 tracking-tighter">Acceso de Usuarios</h3>
+            <div class="space-y-6 text-left">
+                <div>
+                    <label class="text-xs font-bold text-gray-400 uppercase">Usuario</label>
+                    <input type="text" id="log-user" placeholder="Ingrese su usuario">
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-gray-400 uppercase">Contraseña</label>
+                    <input type="password" id="log-pass" placeholder="••••••••">
+                </div>
+                <button onclick="doLogin()" class="w-full bg-azul text-white py-4 rounded-xl font-black text-lg shadow-lg hover:bg-blue-900 transition mt-6 uppercase">Entrar</button>
+                <button onclick="showPage('home')" class="w-full text-gray-400 text-xs font-bold mt-4 uppercase">Volver</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- VISTA: REGISTRO 1 -->
+    <section id="reg-1" class="page-view hidden min-h-[80vh] flex items-center justify-center p-6 fade-in">
+        <div class="bg-white max-w-md w-full rounded-3xl shadow-2xl p-12 border-t-8 border-azul text-center">
+            <h3 class="text-4xl font-black text-azul uppercase mb-4">Bienvenidos</h3>
+            <p class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-10 italic">Creación de cuenta nueva</p>
+            <div class="space-y-6 text-left">
+                <div>
+                    <label class="text-xs font-bold text-azul uppercase ml-1">Usuario Nuevo</label>
+                    <input type="text" id="reg-name" placeholder="Nombre de usuario">
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-azul uppercase ml-1">Contraseña</label>
+                    <input type="password" id="reg-pass" placeholder="Cree una contraseña">
+                </div>
+                <button onclick="showPage('reg-2')" class="w-full bg-azul text-white py-4 rounded-xl font-black text-lg shadow-lg mt-6 uppercase tracking-widest">Siguiente</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- VISTA: REGISTRO 2 -->
+    <section id="reg-2" class="page-view hidden min-h-[80vh] flex items-center justify-center p-6 fade-in">
+        <div class="bg-white max-w-2xl w-full rounded-3xl shadow-2xl p-12 border-t-8 border-rojo">
+            <h3 class="text-2xl font-black text-azul uppercase mb-10 italic border-b-2 border-gray-100 pb-2">Datos del Estudiante</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <input type="number" placeholder="Tarjeta de Identidad">
+                <select>
+                    <option>Grado Escolar...</option>
+                    <option>Pre-escolar</option>
+                    <option>Primaria</option>
+                    <option>Bachillerato</option>
+                </select>
+                <input type="text" placeholder="Dirección de Residencia" class="md:col-span-2">
+                <input type="text" placeholder="Localidad">
+                <input type="tel" placeholder="Número de contacto">
+            </div>
+            <button onclick="finishReg()" class="w-full bg-rojo text-white py-5 rounded-2xl font-black text-xl mt-12 shadow-xl uppercase tracking-widest hover:bg-red-700 transition">Finalizar Registro</button>
+        </div>
+    </section>
+
+    <script>
+        function showPage(id) {
+            document.querySelectorAll('.page-view').forEach(v => v.classList.add('hidden'));
+            document.getElementById(id).classList.remove('hidden');
+            window.scrollTo(0,0);
+        }
+
+        function doLogin() {
+            const user = document.getElementById('log-user').value;
+            if(!user) return alert("Ingrese un nombre");
+            setSession(user);
+        }
+
+        function finishReg() {
+            const user = document.getElementById('reg-name').value;
+            setSession(user);
+        }
+
+        function setSession(name) {
+            document.getElementById('default-school-text').classList.add('hidden');
+            document.getElementById('logged-user-text').classList.remove('hidden');
+            document.getElementById('display-name').innerText = name;
+
+            document.getElementById('home-actions').innerHTML = `
+                <div class="bg-white/10 backdrop-blur-md p-10 rounded-3xl border border-white/20 text-white font-bold flex flex-col items-center">
+                    <p class="text-4xl italic mb-2 tracking-tighter">¡Bienvenido, ${name}!</p>
+                    <p class="text-yellow-400 text-sm uppercase tracking-[0.3em]">Acceso autorizado</p>
+                    <img src="2.jpeg" class="h-64 mt-8 rounded-2xl border-4 border-white/30 shadow-2xl">
+                </div>
+            `;
+            showPage('home');
+        }
+
+        function logout() {
+            location.reload();
+        }
+    </script>
+</body>
+</html>
